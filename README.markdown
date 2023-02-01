@@ -1,12 +1,9 @@
 ## Table of Contents
 
 * [Correctness](#correctness)
-* [Using SwiftLint](#using-swiftlint)
 * [Naming](#naming)
-  * [Prose](#prose)
   * [Delegates](#delegates)
   * [Use Type Inferred Context](#use-type-inferred-context)
-  * [Generics](#generics)
   * [Class Prefixes](#class-prefixes)
   * [Language](#language)
 * [Code Organization](#code-organization)
@@ -19,7 +16,6 @@
   * [Use of Self](#use-of-self)
   * [Protocol Conformance](#protocol-conformance)
   * [Computed Properties](#computed-properties)
-  * [Final](#final)
 * [Function Declarations](#function-declarations)
 * [Function Calls](#function-calls)
 * [Closure Expressions](#closure-expressions)
@@ -29,7 +25,6 @@
   * [Optionals](#optionals)
   * [Lazy Initialization](#lazy-initialization)
   * [Type Inference](#type-inference)
-  * [Syntactic Sugar](#syntactic-sugar)
 * [Functions vs Methods](#functions-vs-methods)
 * [Memory Management](#memory-management)
   * [Extending Object Lifetime](#extending-object-lifetime)
@@ -38,14 +33,8 @@
   * [Ternary Operator](#ternary-operator)
 * [Golden Path](#golden-path)
   * [Failing Guards](#failing-guards)
-* [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
 * [Multi-line String Literals](#multi-line-string-literals)
-* [No Emoji](#no-emoji)
-* [No #imageLiteral or #colorLiteral](#no-imageliteral-or-colorliteral)
-* [Organization and Bundle Identifier](#organization-and-bundle-identifier)
-* [Copyright Statement](#copyright-statement)
-* [Smiley Face](#smiley-face)
 * [References](#references)
 
 

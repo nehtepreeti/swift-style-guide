@@ -1,10 +1,3 @@
-# The Official Kodeco Swift Style Guide.
-### Updated for Swift 5
-
-This style guide is different from others you may see, because the focus is centered on readability for print and the web. We created this style guide to keep the code in our books, tutorials, and starter kits nice and consistent — even though we have many different authors working on the books.
-
-Our overarching goals are clarity, consistency and brevity, in that order.
-
 ## Table of Contents
 
 * [Correctness](#correctness)
@@ -60,10 +53,6 @@ Our overarching goals are clarity, consistency and brevity, in that order.
 
 Strive to make your code compile without warnings. This rule informs many style decisions such as using `#selector` types instead of string literals.
 
-## Using SwiftLint
-
-When writing for raywenderlich.com, you are strongly encouraged — and some teams may require — to use our SwiftLint configuration. See the [SwiftLint Policy](SWIFTLINT.markdown) for more information.
-
 ## Naming
 
 Descriptive and consistent naming makes software easier to read and understand. Use the Swift naming conventions described in the [API Design Guidelines](https://swift.org/documentation/api-design-guidelines/). Some key takeaways include:
@@ -77,12 +66,6 @@ Descriptive and consistent naming makes software easier to read and understand. 
 - sometimes compensating for weak type information
 - striving for fluent usage
 - beginning factory methods with `make`
-- naming methods for their side effects
-  - verb methods follow the -ed, -ing rule for the non-mutating version
-  - noun methods follow the formX rule for the mutating version
-  - boolean types should read like assertions
-  - protocols that describe _what something is_ should read as nouns
-  - protocols that describe _a capability_ should end in _-able_ or _-ible_
 - using terms that don't surprise experts or confuse beginners
 - generally avoiding abbreviations
 - using precedent for names
@@ -94,21 +77,6 @@ Descriptive and consistent naming makes software easier to read and understand. 
 - preferring to name the first parameter instead of including its name in the method name, except as mentioned under Delegates
 - labeling closure and tuple parameters
 - taking advantage of default parameters
-
-### Prose
-
-When referring to methods in prose, being unambiguous is critical. To refer to a method name, use the simplest form possible.
-
-1. Write the method name with no parameters.  **Example:** Next, you need to call `addTarget`.
-2. Write the method name with argument labels.  **Example:** Next, you need to call `addTarget(_:action:)`.
-3. Write the full method name with argument labels and types. **Example:** Next, you need to call `addTarget(_: Any?, action: Selector?)`.
-
-For the above example using `UIGestureRecognizer`, 1 is unambiguous and preferred.
-
-**Pro Tip:** You can use Xcode's jump bar to lookup methods with argument labels. If you’re particularly good at mashing lots of keys simultaneously, put the cursor in the method name and press **Shift-Control-Option-Command-C** (all 4 modifier keys) and Xcode will kindly put the signature on your clipboard.
-
-![Methods in Xcode jump bar](screens/xcode-jump-bar.png)
-
 
 ### Class Prefixes
 
@@ -155,25 +123,6 @@ view.backgroundColor = UIColor.red
 let toView = context.view(forKey: UITransitionContextViewKey.to)
 let view = UIView(frame: CGRect.zero)
 ```
-
-### Generics
-
-Generic type parameters should be descriptive, upper camel case names. When a type name doesn't have a meaningful relationship or role, use a traditional single uppercase letter such as `T`, `U`, or `V`.
-
-**Preferred**:
-```swift
-struct Stack<Element> { ... }
-func write<Target: OutputStream>(to target: inout Target)
-func swap<T>(_ a: inout T, _ b: inout T)
-```
-
-**Not Preferred**:
-```swift
-struct Stack<T> { ... }
-func write<target: OutputStream>(to target: inout target)
-func swap<Thing>(_ a: inout Thing, _ b: inout Thing)
-```
-
 ### Language
 
 Use US English spelling to match Apple's API.
@@ -226,9 +175,7 @@ For UIKit view controllers, consider grouping lifecycle, custom accessors, and I
 
 ### Unused Code
 
-Unused (dead) code, including Xcode template code and placeholder comments should be removed. An exception is when your tutorial or book instructs the user to use the commented code.
-
-Aspirational methods not directly associated with the tutorial whose implementation simply calls the superclass should also be removed. This includes any empty/unused UIApplicationDelegate methods.
+Unused (dead) code, including Xcode template code and placeholder comments should be removed. 
 
 **Preferred**:
 ```swift
@@ -287,10 +234,6 @@ var deviceModels: [String]
 ```
 
 ## Spacing
-
-* Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings as shown below:
-
-![Xcode indent settings](screens/indentation.png)
 
 * Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
 * Tip: You can re-indent by selecting some code (or **Command-A** to select all) and then **Control-I** (or **Editor ▸ Structure ▸ Re-Indent** in the menu). Some of the Xcode template code will have 4-space tabs hard coded, so this is a good way to fix that.
@@ -352,19 +295,16 @@ class TestDatabase : Database {
 }
 ```
 
-* Long lines should be wrapped at around 70 characters. A hard limit is intentionally not specified.
-
 * Avoid trailing whitespaces at the ends of lines.
 
 * Add a single newline character at the end of each file.
 
 ## Comments
 
-When they are needed, use comments to explain **why** a particular piece of code does something. Comments must be kept up-to-date or deleted.
+- When they are needed, use comments to explain why a particular piece of code does something. Comments must be kept up-to-date or deleted.
+- Comments should be answering some form of "why?" question. Anything else should be explainable by the code itself, or not written at all
+- The best comment is the ones you don't need. If you have to write one be sure to explain the rationale behind the code, not just to simply state the obvious
 
-Avoid block comments inline with code, as the code should be as self-documenting as possible. _Exception: This does not apply to those comments used to generate documentation._
-
-Avoid the use of C-style comments (`/* ... */`). Prefer the use of double- or triple-slash.
 
 ## Classes and Structures
 
@@ -450,20 +390,6 @@ var diameter: Double {
 var diameter: Double {
   get {
     return radius * 2
-  }
-}
-```
-
-### Final
-
-Marking classes or members as `final` in tutorials can distract from the main topic and is not required. Nevertheless, use of `final` can sometimes clarify your intent and is worth the cost. In the below example, `Box` has a particular purpose and customization in a derived class is not intended. Marking it `final` makes that clear.
-
-```swift
-// Turn any generic type into a reference type using this Box class.
-final class Box<T> {
-  let value: T
-  init(_ value: T) {
-    self.value = value
   }
 }
 ```
@@ -762,25 +688,6 @@ var lookup = [String: Int]()
 
 **NOTE**: Following this guideline means picking descriptive names is even more important than before.
 
-
-### Syntactic Sugar
-
-Prefer the shortcut versions of type declarations over the full generics syntax.
-
-**Preferred**:
-```swift
-var deviceModels: [String]
-var employees: [Int: String]
-var faxNumber: Int?
-```
-
-**Not Preferred**:
-```swift
-var deviceModels: Array<String>
-var employees: Dictionary<Int, String>
-var faxNumber: Optional<Int>
-```
-
 ## Functions vs Methods
 
 Free functions, which aren't attached to a class or type, should be used sparingly. When possible, prefer to use a method instead of a free function. This aids in readability and discoverability.
@@ -807,7 +714,7 @@ let value = max(x, y, z)  // another free function that feels natural
 
 ## Memory Management
 
-Code (even non-production, tutorial demo code) should not create reference cycles. Analyze your object graph and prevent strong cycles with `weak` and `unowned` references. Alternatively, use value types (`struct`, `enum`) to prevent cycles altogether.
+Code should not create reference cycles. Analyze your object graph and prevent strong cycles with `weak` and `unowned` references. Alternatively, use value types (`struct`, `enum`) to prevent cycles altogether.
 
 ### Extending object lifetime
 
@@ -843,30 +750,7 @@ resource.request().onComplete { [weak self] response in
 ```
 
 ## Access Control
-
-Full access control annotation in tutorials can distract from the main topic and is not required. Using `private` and `fileprivate` appropriately, however, adds clarity and promotes encapsulation. Prefer `private` to `fileprivate`; use `fileprivate` only when the compiler insists.
-
-Only explicitly use `open`, `public`, and `internal` when you require a full access control specification.
-
-Use access control as the leading property specifier. The only things that should come before access control are the `static` specifier or attributes such as `@IBAction`, `@IBOutlet` and `@discardableResult`.
-
-**Preferred**:
-```swift
-private let message = "Great Scott!"
-
-class TimeMachine {  
-  private dynamic lazy var fluxCapacitor = FluxCapacitor()
-}
-```
-
-**Not Preferred**:
-```swift
-fileprivate let message = "Great Scott!"
-
-class TimeMachine {  
-  lazy dynamic private var fluxCapacitor = FluxCapacitor()
-}
-```
+// Need to update this secition based on the architecture layer and dependency injection definition. 
 
 ## Control Flow
 
@@ -999,24 +883,6 @@ if let number1 = number1 {
 
 Guard statements are required to exit in some way. Generally, this should be simple one line statement such as `return`, `throw`, `break`, `continue`, and `fatalError()`. Large code blocks should be avoided. If cleanup code is required for multiple exit points, consider using a `defer` block to avoid cleanup code duplication.
 
-## Semicolons
-
-Swift does not require a semicolon after each statement in your code. They are only required if you wish to combine multiple statements on a single line.
-
-Do not write multiple statements on a single line separated with semicolons.
-
-**Preferred**:
-```swift
-let swift = "not a scripting language"
-```
-
-**Not Preferred**:
-```swift
-let swift = "not a scripting language";
-```
-
-**NOTE**: Swift is very different from JavaScript, where omitting semicolons is [generally considered unsafe](https://stackoverflow.com/questions/444080/do-you-recommend-using-semicolons-after-every-statement-in-javascript)
-
 ## Parentheses
 
 Parentheses around conditionals are not required and should be omitted.
@@ -1077,73 +943,6 @@ let message = "You cannot charge the flux " +
   "You must use a super-charger " +
   "which costs 10 credits. You currently " +
   "have \(credits) credits available."
-```
-
-## No Emoji
-
-Do not use emoji in your projects. For those readers who actually type in their code, it's an unnecessary source of friction. While it may be cute, it doesn't add to the learning and it interrupts the coding flow for these readers.
-
-## No #imageLiteral or #colorLiteral
-
-Likewise, do not use Xcode's ability to drag a color or an image into a source statement. These turn into #colorLiteral and #imageLiteral, respectively, and present unpleasant challenges for a reader trying to enter them based on tutorial text. Instead, use `UIColor(red:green:blue)` and `UIImage(imageLiteralResourceName:)`.
-
-## Organization and Bundle Identifier
-
-Where an Xcode project is involved, the organization should be set to `Ray Wenderlich` and the Bundle Identifier set to `com.raywenderlich.TutorialName` where `TutorialName` is the name of the tutorial project.
-
-![Xcode Project settings](screens/project_settings.png)
-
-## Copyright Statement
-
-The following copyright statement should be included at the top of every source
-file:
-
-```swift
-/// Copyright (c) 2022 Kodeco
-/// 
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-/// 
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-/// 
-/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
-/// distribute, sublicense, create a derivative work, and/or sell copies of the
-/// Software in any work that is designed, intended, or marketed for pedagogical or
-/// instructional purposes related to programming, coding, application development,
-/// or information technology.  Permission for such use, copying, modification,
-/// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
-/// 
-/// This project and source code may use libraries or frameworks that are
-/// released under various Open-Source licenses. Use of those libraries and
-/// frameworks are governed by their own individual licenses.
-///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
-```
-
-## Smiley Face
-
-Smiley faces are a very prominent style feature of the [raywenderlich.com](https://www.raywenderlich.com/) site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket `]` is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis `)` creates a half-hearted smile, and thus is not preferred.
-
-**Preferred**:
-```
-:]
-```
-
-**Not Preferred**:
-```
-:)
 ```
 
 ## References
